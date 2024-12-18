@@ -1,0 +1,21 @@
+B. herbertiana is probably a syn. of B. diffracta and has a compound inflorescence [source: NYBG specimen that was sequenced for phylogeny]
+B. parvifolia is compound inflorescence [MOBOT specimen that was sequenced for phylogeny]
+B. tribachiata (spelled wrong) is compound [flora of edcuador]
+B. lehmanii is compound [treatment of Bomarea of colombia]
+B. straminea is compound [treatment of Bomarea of colombia]
+B. angustipetala is compound [treatment of Bomarea of colombia]
+Drop the tip of B. caudata from analysis
+B. foliosa is bracteole [flora of ecuador]
+B. euryphylla is bracteole [flora of ecuador] 
+B. acuminata bracteole [flora of CR]
+B. bredemeyerana Colombia is simple [treatment of Bomarea colombia]
+B. killipii Peru is compound 2
+B. bredemeyerana Colo is simple 0
+B. alstroemerioides Peru is simple 0
+B. hartwegii is simple [flora of ecuador]
+B. trimorphophylla is compound [flora of ecuador]
+B. chimborazensis is compound [flora of ecuador]
+
+Graham
+12611
+
