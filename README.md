@@ -1,10 +1,9 @@
 # Bomarea Inflorescence Trait Analysis
 
-This project uses herbarium specimen data to analyze inflorescence types across *Bomarea* species using a combination of R, RevBayes, and bash. The workflow generates phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
+This project uses herbarium specimen data to analyze inflorescence traits across *Bomarea* species using a combination of R, RevBayes, and bash. The workflow generates phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
 
----
 
-## Step 1: Create a Nexus File of Inflorescence Types
+## Step 1: Create a Nexus File of Inflorescence Trait
 
 1. **Run `bomareacode.R` on `bomarea traits.xlsx`**
     - This script takes measurements from herbarium specimens and the Excel sheet, categorizes inflorescences (type, branchiness, size, and sparsity) and outputs a `.nexus` file.
@@ -13,7 +12,6 @@ This project uses herbarium specimen data to analyze inflorescence types across 
     - You should have a file named `type.nexus` in your data folder.
     - **NEXUS format:** A widely used file format in bioinformatics for storing taxa, morphological/molecular characters, trees, etc.
 
----
 
 ## Step 2: Generate a Tree with RevBayes
 
@@ -73,7 +71,6 @@ This project uses herbarium specimen data to analyze inflorescence types across 
 
     - You should now have a file called `infl_type_ase_ard.tree` in your output folder.
 
----
 
 ## Step 3: Plot the Phylogenetic Tree
 
@@ -88,7 +85,6 @@ This project uses herbarium specimen data to analyze inflorescence types across 
 
 2. **Save the plot as a `.png` file.**
 
----
 
 ## Step 4: Create a Violin Plot of Transition Rates
 
@@ -98,7 +94,6 @@ This project uses herbarium specimen data to analyze inflorescence types across 
 
 2. **Save the plot as a `.png` file.**
 
----
 
 ## Definitions
 
@@ -111,5 +106,3 @@ This project uses herbarium specimen data to analyze inflorescence types across 
 | **Herbarium** | A collection of preserved plant specimens. |
 | **Taxa** | The tips of the phylogeny representing species. |
 | **Markov Chain Monte Carlo (MCMC)** | A method for sampling from probability distributions, used here to estimate ancestral states and trait transition rates. |
-
----
