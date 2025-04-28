@@ -1,4 +1,4 @@
-=# Bomarea Inflorescence Trait Analysis
+# Bomarea Inflorescence Trait Analysis
 
 This project uses herbarium specimen data to analyze inflorescence types across *Bomarea* species using a combination of R, RevBayes, and bash. The workflow generates phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
 
