@@ -1,106 +1,115 @@
-Step 1: Create a Nexus File of Inflorescence Types
-Run bomareacode.R on bomarea traits.xlsx
+=# Bomarea Inflorescence Trait Analysis
 
-This script takes measurements from herbarium specimens and the Excel sheet, categorizes inflorescences into three types (labeled 0, 1, and 2), and outputs a .nexus file.
+This project uses herbarium specimen data to analyze inflorescence types across *Bomarea* species using a combination of R, RevBayes, and bash. The workflow generates phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
 
-Output
+---
 
-You should have a file named type.nexus in your data folder.
+## Step 1: Create a Nexus File of Inflorescence Types
 
-NEXUS format: A widely used file format in bioinformatics for storing taxa, morphological/molecular characters, trees, etc.
+1. **Run `bomareacode.R` on `bomarea traits.xlsx`**
+    - This script takes measurements from herbarium specimens and the Excel sheet, categorizes inflorescences (type, branchiness, size, and sparsity) and outputs a `.nexus` file.
 
-Step 2: Generate a Tree with RevBayes
-Set your working directory
+2. **Output**
+    - You should have a file named `type.nexus` in your data folder.
+    - **NEXUS format:** A widely used file format in bioinformatics for storing taxa, morphological/molecular characters, trees, etc.
 
-bash
-Copy
-Edit
-cd ~/Desktop/bomarea_traits/
-Open RevBayes and run the analysis
+---
 
-Start RevBayes:
+## Step 2: Generate a Tree with RevBayes
 
-bash
-Copy
-Edit
-rb
-In RevBayes, execute the script:
+1. **Set your working directory**
 
-rev
-Copy
-Edit
-source("infl_type_ard.Rev")
-This script runs a Markov Chain Monte Carlo (MCMC) analysis using the .tree (molecular data) and .nexus (trait data) files.
+    ```bash
+    cd ~/Desktop/bomarea_traits/
+    ```
 
-For more details on MCMC, see the RevBayes MCMC tutorial.
+2. **Open RevBayes and run the analysis**
 
-Combine runs and remove the burn-in (first 10%)
+    - Start RevBayes:
 
-Open another terminal window, navigate to the output folder:
+    ```bash
+    rb
+    ```
 
-bash
-Copy
-Edit
-cd ~/Desktop/bomarea_traits/output
-Combine results from two MCMC runs:
+    - In RevBayes, execute the script:
 
-bash
-Copy
-Edit
-awk 'FNR == 1 && NR != 1 { next } { print }' infl_type_ard_states_run_1.txt infl_type_ard_states_run_2.txt > infl_type_ard_states_combined.txt
-Remove the first 10% ("burn-in") of the combined results:
+    ```rev
+    source("infl_type_ard.Rev")
+    ```
 
-bash
-Copy
-Edit
-total_lines=$(wc -l < infl_type_ard_states_combined.txt)
-skip_lines=$((total_lines / 10))
-awk -v skip="$skip_lines" 'NR > skip || NR == 1' infl_type_ard_states_combined.txt > infl_type_ard_states_combined_trimmed.txt
-Finish the RevBayes analysis
+    - This script runs a Markov Chain Monte Carlo (MCMC) analysis using the `.tree` (molecular data) and `.nexus` (trait data) files.  
+      > For more details on MCMC, see the [RevBayes MCMC tutorial](https://revbayes.github.io/tutorials/mcmc/archery.html).
 
-In the original RevBayes window, execute the two remaining lines after the -> prompt.
+3. **Combine runs and remove the burn-in (first 10%)**
 
-This will:
+    - In another terminal window, navigate to the output folder:
 
-Calculate ancestral states (pie charts at phylogenetic nodes).
+    ```bash
+    cd ~/Desktop/bomarea_traits/output
+    ```
 
-Output a tree file for visualization.
+    - Combine results from two MCMC runs:
 
-Output
+    ```bash
+    awk 'FNR == 1 && NR != 1 { next } { print }' infl_type_ard_states_run_1.txt infl_type_ard_states_run_2.txt > infl_type_ard_states_combined.txt
+    ```
 
-You should now have a file called infl_type_ase_ard.tree in your output folder.
+    - Remove the first 10% ("burn-in") of the combined results:
 
-Step 3: Plot the Phylogenetic Tree
-Run plotresults.R
+    ```bash
+    total_lines=$(wc -l < infl_type_ard_states_combined.txt)
+    skip_lines=$((total_lines / 10))
+    awk -v skip="$skip_lines" 'NR > skip || NR == 1' infl_type_ard_states_combined.txt > infl_type_ard_states_combined_trimmed.txt
+    ```
 
-Input the file infl_type_ase_ard.tree.
+4. **Finish the RevBayes analysis**
 
-This will generate a phylogeny with:
+    - In the original RevBayes window, execute the two remaining lines after the `->` prompt.
+    - This will:
+      - Calculate ancestral states (pie charts at phylogenetic nodes).
+      - Output a tree file for visualization.
 
-Species names
+5. **Output**
 
-Trait states
+    - You should now have a file called `infl_type_ase_ard.tree` in your output folder.
 
-Node pie charts showing ancestral states
+---
 
-A legend
+## Step 3: Plot the Phylogenetic Tree
 
-Save the plot as a .png file.
+1. **Run `plotresults.R`**
 
-Step 4: Create a Violin Plot of Transition Rates
-Run plotviolinrates.R
+    - Input the file `infl_type_ase_ard.tree`.
+    - This will generate a phylogeny with:
+      - Species names
+      - Trait states
+      - Node pie charts showing ancestral states
+      - A legend
 
-This script creates a violin plot showing the rates of transitions between inflorescence types.
+2. **Save the plot as a `.png` file.**
 
-Save the plot as a .png file.
+---
 
-Definitions
+## Step 4: Create a Violin Plot of Transition Rates
 
-Term	Definition
-Inflorescences	Arrangement of flowers on a floral axis (e.g., the brown part of a sunflower consists of many tiny flowers).
-Genus	A classification level above species, grouping together similar species.
-Bomarea	A genus of tropical plants with diverse inflorescence structures.
-Phylogeny	A "tree of life" diagram showing evolutionary relationships among organisms.
-Herbarium	A collection of preserved plant specimens.
-Taxa	The tips of the phylogeny representing species.
-Markov Chain Monte Carlo (MCMC)	A method for sampling from probability distributions, used here to estimate ancestral states and trait transition rates.
+1. **Run `plotviolinrates.R`**
+
+    - This script creates a violin plot showing the rates of transitions between inflorescence types.
+
+2. **Save the plot as a `.png` file.**
+
+---
+
+## Definitions
+
+| Term | Definition |
+| :--- | :--- |
+| **Inflorescences** | Arrangement of flowers on a floral axis (e.g., the brown part of a sunflower consists of many tiny flowers). |
+| **Genus** | A classification level above species, grouping together similar species. |
+| **Bomarea** | A genus of tropical plants with diverse inflorescence structures. |
+| **Phylogeny** | A "tree of life" diagram showing evolutionary relationships among organisms. |
+| **Herbarium** | A collection of preserved plant specimens. |
+| **Taxa** | The tips of the phylogeny representing species. |
+| **Markov Chain Monte Carlo (MCMC)** | A method for sampling from probability distributions, used here to estimate ancestral states and trait transition rates. |
+
+---
