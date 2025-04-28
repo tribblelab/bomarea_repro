@@ -1,4 +1,4 @@
-# Bomarea Inflorescence Trait Analysis
+# *Bomarea* Inflorescence Trait Analysis
 
 Analyze inflorescence traits across *Bomarea* species using herbarium specimens, R, RevBayes, and bash. Makes phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
 
@@ -6,11 +6,10 @@ Analyze inflorescence traits across *Bomarea* species using herbarium specimens,
 ## Step 1: Create a Nexus File of Inflorescence Trait
 
 1. **Run `bomareacode.R` on `bomarea traits.xlsx`**
-    - This script takes measurements from herbarium specimens and the Excel sheet, categorizes inflorescences (type, branchiness, size, and sparsity) and outputs a `.nexus` file.
+    - This script takes measurements from herbarium specimens and the Excel sheet, categorizes inflorescences (type, branchiness, size, and sparsity) and outputs a `.nexus` file
 
 2. **Output**
-    - You should have a file named `type.nexus` in your data folder.
-    - **NEXUS format:** A widely used file format in bioinformatics for storing taxa, morphological/molecular characters, trees, etc.
+    - You should have a file named `type.nexus` in your data folder
 
 
 ## Step 2: Generate a Tree with RevBayes
@@ -35,8 +34,7 @@ Analyze inflorescence traits across *Bomarea* species using herbarium specimens,
     source("infl_type_ard.Rev")
     ```
 
-    - This script runs a Markov Chain Monte Carlo (MCMC) analysis using the `.tree` (molecular data) and `.nexus` (trait data) files.  
-      > For more details on MCMC, see the [RevBayes MCMC tutorial](https://revbayes.github.io/tutorials/mcmc/archery.html).
+    - This script runs a Markov Chain Monte Carlo (MCMC) analysis using the `.tree` (molecular data) and `.nexus` (trait data) files
 
 3. **Combine runs and remove the burn-in (first 10%)**
 
@@ -62,14 +60,14 @@ Analyze inflorescence traits across *Bomarea* species using herbarium specimens,
 
 4. **Finish the RevBayes analysis**
 
-    - In the original RevBayes window, execute the two remaining lines after the `->` prompt.
+    - In the original RevBayes window, execute the two remaining lines after the `->` prompt
     - This will:
-      - Calculate ancestral states (pie charts at phylogenetic nodes).
-      - Output a tree file for visualization.
+      - Calculate ancestral states (pie charts at phylogenetic nodes)
+      - Output a tree file for visualization
 
 5. **Output**
 
-    - You should now have a file called `infl_type_ase_ard.tree` in your output folder.
+    - You should now have a file called `infl_type_ase_ard.tree` in your output folder
 
 
 ## Step 3: Plot the Phylogenetic Tree
@@ -90,19 +88,6 @@ Analyze inflorescence traits across *Bomarea* species using herbarium specimens,
 
 1. **Run `plotviolinrates.R`**
 
-    - This script creates a violin plot showing the rates of transitions between inflorescence types.
+    - This script creates a violin plot showing the rates of transitions between inflorescence types
 
 2. **Save the plot as a `.png` file.**
-
-
-## Definitions
-
-| Term | Definition |
-| :--- | :--- |
-| **Inflorescences** | Arrangement of flowers on a floral axis (e.g., the brown part of a sunflower consists of many tiny flowers). |
-| **Genus** | A classification level above species, grouping together similar species. |
-| **Bomarea** | A genus of tropical plants with diverse inflorescence structures. |
-| **Phylogeny** | A "tree of life" diagram showing evolutionary relationships among organisms. |
-| **Herbarium** | A collection of preserved plant specimens. |
-| **Taxa** | The tips of the phylogeny representing species. |
-| **Markov Chain Monte Carlo (MCMC)** | A method for sampling from probability distributions, used here to estimate ancestral states and trait transition rates. |
