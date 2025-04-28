@@ -1,6 +1,6 @@
 # Bomarea Inflorescence Trait Analysis
 
-This project uses herbarium specimen data to analyze inflorescence traits across *Bomarea* species using a combination of R, RevBayes, and bash. The workflow generates phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
+Analyze inflorescence traits across *Bomarea* species using herbarium specimens, R, RevBayes, and bash. Makes phylogenetic trees, ancestral state reconstructions, and transition rate violin plots.
 
 
 ## Step 1: Create a Nexus File of Inflorescence Trait
